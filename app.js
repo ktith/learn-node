@@ -1,12 +1,14 @@
+require('dotenv').config();
 const express = require('express'); // Import the Express.js module
 const mysql = require('mysql');
 
+
 // create the database connection pool
 const pool = mysql.createPool({
-  host: 'localhost',
-  user: 'admin',
-  password: '123456',
-  database: 'kiwipay_prod_2',
+  host: process.env.DB_HOST,
+  user: process.env.DB_USER,
+  password: process.env.DB_PASSWORD,
+  database: process.env.DB_NAME,
   connectionLimit: 10 // set connection limit
 });
 
@@ -19,7 +21,7 @@ pool.getConnection((err, connection) => {
 
 pool.query('SELECT * FROM users', (err, results) => {
   if (err) throw err
-  console.log("hello");
+  console.log(results);
 });
 
 const app = express(); // Create an Express.js app
