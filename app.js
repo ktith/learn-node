@@ -19,10 +19,10 @@ pool.getConnection((err, connection) => {
   connection.release()
 });
 
-// pool.query('SELECT * FROM users', (err, results) => {
-//   if (err) throw err
-//   console.log(results);
-// });
+pool.query('SELECT * FROM users', (err, results) => {
+  if (err) throw err
+  console.log(results);
+});
 
 const app = express(); // Create an Express.js app
 const router = express.Router(); // Create an instance of the router
