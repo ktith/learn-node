@@ -1,7 +1,11 @@
 require('dotenv').config();
+
 const express = require('express'); // Import the Express.js module
 const mysql = require('mysql');
 
+// import knex to app
+const knexConfig = require('./knexfile');
+const knex = require('knex')(knexConfig);
 
 // create the database connection pool
 const pool = mysql.createPool({
@@ -19,10 +23,21 @@ pool.getConnection((err, connection) => {
   connection.release()
 });
 
-pool.query('SELECT * FROM users', (err, results) => {
-  if (err) throw err
-  console.log(results);
-});
+// pool.query('SELECT * FROM users', (err, results) => {
+//   if (err) throw err
+//   console.log(results);
+// });
+
+knex.select('*').from('users')
+  .then(rows => {
+    console.log(rows);
+  })
+  .catch(error => {
+    console.error(error);
+  })
+  .finally(() => {
+    knex.destroy();
+  });
 
 const app = express(); // Create an Express.js app
 const router = express.Router(); // Create an instance of the router
