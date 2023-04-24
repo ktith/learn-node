@@ -16,9 +16,9 @@ router.get('/users', (req, res) => {
 router.get('/users/:id', (req, res) => {
     
     // Get the value of the "id" parameter from the URL
-    const userId = req.params.id;
+    const user_id = req.params.id;
     // Return a response with the user ID
-    res.send(`User ID: ${userId}`);
+    res.send(`User ID: ${user_id}`);
 
 });
 
