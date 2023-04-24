@@ -7,6 +7,9 @@ const mysql = require('mysql');
 const knexConfig = require('./knexfile');
 const knex = require('knex')(knexConfig);
 
+const bodyParser = require('body-parser');
+const userRouter = require('./routes/users');
+
 // create the database connection pool
 const pool = mysql.createPool({
   host: process.env.DB_HOST,
@@ -42,25 +45,8 @@ knex.select('*').from('users')
 const app = express(); // Create an Express.js app
 const router = express.Router(); // Create an instance of the router
 
-router.get('/users', (req, res) => {
-    // Define a route handler for GET /users
-    const users = [
-      { id: 1, name: 'Alice' },
-      { id: 2, name: 'Bob' },
-      { id: 3, name: 'Charlie' },
-    ];
-    res.json(users); // Return a JSON response
-});
-
-router.get('/users/:id', (req, res) => {
-    
-    // Get the value of the "id" parameter from the URL
-    const user_id = req.params.id;
-    // Return a response with the user ID
-    res.send(`User ID: ${user_id}`);
-
-});
-
+app.use(bodyParser.json());
+app.use('/users', userRouter);
 app.use('/', router);
 
 app.get('/', (req, res) => {
