@@ -1,6 +1,7 @@
 // models/user.js
 
 class User {
+  
   static async getAll() {
     const users = await knex('users').select();
     return users;

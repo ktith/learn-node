@@ -3,6 +3,7 @@
 const User = require('../models/user');
 
 class UserController {
+  
   static async index(req, res) {
     const users = await User.getAll();
     res.json(users);
