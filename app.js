@@ -1,4 +1,26 @@
 const express = require('express'); // Import the Express.js module
+const mysql = require('mysql');
+
+// create the database connection pool
+const pool = mysql.createPool({
+  host: 'localhost',
+  user: 'admin',
+  password: '123456',
+  database: 'kiwipay_prod_2',
+  connectionLimit: 10 // set connection limit
+});
+
+// test the database connection
+pool.getConnection((err, connection) => {
+  if (err) throw err
+  console.log('Connected to MySQL database...')
+  connection.release()
+});
+
+pool.query('SELECT * FROM users', (err, results) => {
+  if (err) throw err
+  console.log("hello");
+});
 
 const app = express(); // Create an Express.js app
 const router = express.Router(); // Create an instance of the router
