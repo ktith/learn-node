@@ -2,3 +2,7 @@ test
 node_modules
 .env
 .firebase/
+package-lock.json
+yarn.lock
+package-lock.json
+package-lock.json
