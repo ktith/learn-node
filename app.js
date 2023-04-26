@@ -29,6 +29,16 @@ app.get('/', (req, res) => {
   res.render('index', { title: 'My Homepage' });
 });
 
+router.get('/people', (req, res) => {
+  // Define a route handler for GET /users
+  const users = [
+    { id: 1, name: 'Alice' },
+    { id: 2, name: 'Bob' },
+    { id: 3, name: 'Charlie' },
+  ];
+  res.json(users); // Return a JSON response
+});
+
 const port = 3000; // Define the port number for your server
 app.listen(port, () => {
   console.log(`Server is running on port ${port}`); // Start the server
