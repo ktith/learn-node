@@ -2,3 +2,5 @@ test
 node_modules
 .env
 .firebase/
+firebase-debug.log*
+package-lock.json
